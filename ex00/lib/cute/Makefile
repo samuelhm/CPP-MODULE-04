@@ -3,53 +3,45 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+         #
+#    By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:23:11 by shurtado          #+#    #+#              #
-#    Updated: 2025/02/24 14:00:06 by shurtado         ###   ########.fr        #
+#    Updated: 2025/02/18 00:43:28 by shurtado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Animals
+NAME		=	libcute.a
+TEST_PROG	=	program
 CC			=	c++
-CPPFLAGS	=	-g -Wall -Werror -Wextra -std=c++98 -MMD -MP
-LDFLAGS		=	-L$(CUTE_DIR) -lcute
-INCLUDES	=	-I$(CUTE_DIR)/inc
+AR			=	ar rcs
+CPPFLAGS	=	-g -Wall -Werror -Wextra -std=c++98 -MMD -MP -Iinc
 
-CUTE_DIR	=	lib/cute
-CUTE		=	$(CUTE_DIR)/libcute.a
+CLASSES		=	Color Emoji Frame
 
-CLASSES		=	Animal
-
-SRC			=	$(addprefix src/, $(foreach class, $(CLASSES), $(class)/$(class).cpp) main.cpp)
-
+SRC			=	$(addprefix src/, $(foreach class, $(CLASSES), $(class)/$(class).cpp))
 OBJS		=	$(SRC:%.cpp=obj/%.o)
 DEPS		=	$(OBJS:.o=.d)
 
-all: $(CUTE) $(NAME)
+all: $(NAME)
 
-$(CUTE):
-	$(MAKE) -C $(CUTE_DIR)
-
-$(NAME): $(OBJS) $(CUTE)
-	$(CC) $(INCLUDES) $(CPPFLAGS) -o $@ $^ $(LDFLAGS)
+$(NAME): $(OBJS)
+	@echo "🔨 Creando librería estática $(NAME)..."
+	$(AR) $@ $^
 
 obj/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	$(CC) $(INCLUDES) $(CPPFLAGS) -c $< -o $@
-
-
-clean:
-	rm -rf obj
-	@$(MAKE) clean -C $(CUTE_DIR)
-
-
-fclean: clean
-	rm -f $(NAME)
-	@$(MAKE) fclean -C $(CUTE_DIR)
-
-re: fclean all
+	$(CC) $(CPPFLAGS) -c $< -o $@
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re submodule
+clean:
+	@echo "🗑️ Eliminando archivos objeto..."
+	rm -rf obj
+
+fclean: clean
+	@echo "🗑️ Eliminando librería y ejecutables..."
+	rm -f $(NAME) $(TEST_PROG)
+
+re: fclean all
+
+.PHONY: all clean fclean re

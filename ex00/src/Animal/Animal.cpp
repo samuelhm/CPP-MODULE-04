@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:53 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/24 10:56:49 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:12:19 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 Animal::Animal()
 {
-	type = "Animal"
+	type = "Animal";
 }
 
 Animal::Animal(const string_t Name)
@@ -38,4 +38,14 @@ Animal&	Animal::operator=(const Animal &other)
 
 Animal::~Animal()
 {
+}
+
+const string_t	Animal::getType()
+{
+	return (this->type);
+}
+
+void	Animal::setType(const string_t &Type)
+{
+	this->type = Type;
 }
