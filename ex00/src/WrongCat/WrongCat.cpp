@@ -1,49 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:00:43 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/25 20:08:21 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:14:33 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-Cat::Cat() : Animal("Cat")
+WrongCat::WrongCat() : WrongAnimal("WrongCat")
 {
-	std::cout << "Cat Default Constructor Call." << std::endl;
-	this->brain = new Brain();
+	std::cout << "WrongCat Default Constructor Call." << std::endl;
 }
 
-Cat::Cat(const Cat &other) : Animal(other), brain(NULL)
+WrongCat::WrongCat(const WrongCat &other) : WrongAnimal(other)
 {
-	std::cout << "Cat Copy Constructor Call." << std::endl;
-	if (other.brain)
-		this->brain = new Brain(*other.brain);
+	type = other.type;
+	std::cout << "WrongCat Copy Constructor Call." << std::endl;
 }
 
-Cat&	Cat::operator=(const Cat &other)
+WrongCat&	WrongCat::operator=(const WrongCat &other)
 {
 	if (this != &other)
 	{
 		this->type = other.type;
-		if (this->brain)
-			delete (this->brain);
-		this->brain = new Brain(*other.brain);
 	}
 	return (*this);
 }
 
-Cat::~Cat()
+WrongCat::~WrongCat()
 {
-	std::cout << "Cat Destructor call." << std::endl;
-	delete brain;
+	std::cout << "WrongCat Destructor call." << std::endl;
 }
 
-void	Cat::makeSound() const
+void	WrongCat::makeSound() const
 {
 	std::cout << "Miauuuu" << std::endl;
 }

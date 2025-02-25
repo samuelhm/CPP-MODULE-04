@@ -6,13 +6,13 @@
 #    By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:23:11 by shurtado          #+#    #+#              #
-#    Updated: 2025/02/25 19:56:06 by shurtado         ###   ########.fr        #
+#    Updated: 2025/02/25 19:09:14 by shurtado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	Animals
 CC			=	c++
-CPPFLAGS	=	-g -Wall -Werror -Wextra -std=c++98 -MMD -MP -fsanitize=address -pedantic
+CPPFLAGS	=	-g -Wall -Werror -Wextra -std=c++98 -MMD -MP
 
 CLASSES		=	Animal Cat Dog Brain
 SRC			=	$(addprefix src/, $(foreach class, $(CLASSES), $(class)/$(class).cpp) main.cpp)
@@ -22,11 +22,13 @@ DEPS		=	$(OBJS:.o=.d)
 
 all: $(NAME)
 
+$(CUTE):
+	$(MAKE) -C $(CUTE_DIR)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(CUTE)
 	$(CC) $(INCLUDES) $(CPPFLAGS) -o $@ $^ $(LDFLAGS)
 
-obj/%.o: %.cpp Makefile
+obj/%.o: %.cpp
 	@mkdir -p $(dir $@)
 	$(CC) $(INCLUDES) $(CPPFLAGS) -c $< -o $@
 
