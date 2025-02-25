@@ -3,23 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 18:23:44 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/18 02:18:48 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:18:49 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "CuteConsole.h"
-#include "ClapTrap/ClapTrap.hpp"
-
+#include "Dog/Dog.hpp"
+#include "Cat/Cat.hpp"
 
 int main()
 {
-	ClapTrap clap("pepe");
-	ClapTrap clap2("pepito");
-	clap.attack("pepito");
-	clap2.takeDamage(5);
-	clap2.beRepaired(3);
+	const Animal* meta = new Animal();
+	const Animal* j = new Dog();
+	const Animal* i = new Cat();
+	std::cout << j->getType() << " " << std::endl;
+	std::cout << i->getType() << " " << std::endl;
+	i->makeSound();
+	j->makeSound();
+	meta->makeSound();
+	delete(meta);
+	delete(j);
+	delete(i);
 	return (0);
 }

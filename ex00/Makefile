@@ -6,27 +6,22 @@
 #    By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:23:11 by shurtado          #+#    #+#              #
-#    Updated: 2025/02/24 14:00:06 by shurtado         ###   ########.fr        #
+#    Updated: 2025/02/25 10:21:31 by shurtado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	Animals
 CC			=	c++
 CPPFLAGS	=	-g -Wall -Werror -Wextra -std=c++98 -MMD -MP
-LDFLAGS		=	-L$(CUTE_DIR) -lcute
-INCLUDES	=	-I$(CUTE_DIR)/inc
 
-CUTE_DIR	=	lib/cute
-CUTE		=	$(CUTE_DIR)/libcute.a
-
-CLASSES		=	Animal
+CLASSES		=	Animal Cat Dog
 
 SRC			=	$(addprefix src/, $(foreach class, $(CLASSES), $(class)/$(class).cpp) main.cpp)
 
 OBJS		=	$(SRC:%.cpp=obj/%.o)
 DEPS		=	$(OBJS:.o=.d)
 
-all: $(CUTE) $(NAME)
+all: $(NAME)
 
 $(CUTE):
 	$(MAKE) -C $(CUTE_DIR)
@@ -41,15 +36,13 @@ obj/%.o: %.cpp
 
 clean:
 	rm -rf obj
-	@$(MAKE) clean -C $(CUTE_DIR)
 
 
 fclean: clean
 	rm -f $(NAME)
-	@$(MAKE) fclean -C $(CUTE_DIR)
 
 re: fclean all
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re submodule
+.PHONY: all clean fclean re
