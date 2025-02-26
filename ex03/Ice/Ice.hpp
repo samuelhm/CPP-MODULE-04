@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:58:28 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/26 13:00:41 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:13:03 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../AMateria/AMateria.hpp"
 #include "../interfaces/ICharacter.hpp"
 
-class Ice : public AMateria, public ICharacter
+class Ice : public AMateria
 {
 	public:
 		Ice();

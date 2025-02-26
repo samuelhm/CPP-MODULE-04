@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cure.hpp                                           :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 12:57:19 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/26 13:12:56 by shurtado         ###   ########.fr       */
+/*   Created: 2025/02/26 13:13:50 by shurtado          #+#    #+#             */
+/*   Updated: 2025/02/26 13:16:09 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CURE_HPP
-#define CURE_HPP
+#ifndef CHARACTER_HPP
+#define CHARACTER_HPP
 
 #include "../AMateria/AMateria.hpp"
-#include "../interfaces/ICharacter.hpp"
 
-class Cure : public AMateria
+class Character : ICharacter
 {
+	private:
+		AMateria *materias[4];
 	public:
-		Cure();
-		Cure(const Cure &other);
-		Cure& operator=(const Cure &other);
-		~Cure();
+		Character();
+		Character(const Character &other);
+		Character& operator=(const Character &other);
+		~Character();
 };
 
 #endif
