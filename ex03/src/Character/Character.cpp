@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:13:40 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/28 21:41:27 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/28 22:30:55 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,18 @@ Character::Character(const std::string &Name) : name(Name)
 Character::Character(const Character &other) : name(other.name)
 {
 	for (int i = 0; i < 4 ; i++)
-		if (other.materias[i] != NULL)
+	{
+		if (other.materias[i])
 			materias[i] = other.materias[i]->clone();
+		else
+			materias[i] = NULL;
+	}
 }
 Character& Character::operator=(const Character &other)
 {
+	if (this == &other)
+		return (*this);
+	name = other.name;
 	for (int i = 0; i < 4 ; i++)
 		if (materias[i] != NULL)
 		{
@@ -58,33 +65,38 @@ std::string const & Character::getName() const
 {
 	return (name);
 }
+
 void Character::equip(AMateria* m)
 {
 	int i = 0;
 	if (!m)
 		return ;
-	while (materias[i])
+	while (i < 4 && materias[i])
 		i++;
-	if (i >= 3)
+	if (i == 4)
+	{
 		std::cout << "Inventory full, cannot equip this materia." << std::endl;
+		delete m;
+	}
 	else
 	{
 		materias[i] = m;
 		std::cout << "Materia equiped" << std::endl;
 	}
 }
+
 void Character::unequip(int idx)
 {
-	if (idx > 4 || idx < 1)
+	if (idx > 3 || idx < 0)
 	{
-		std::cout << "Inventory slots is 1 to 4!!" << std::endl;
+		std::cout << "Inventory slots is 0 to 3!!" << std::endl;
 		return ;
 	}
-	if (!materias[idx - 1])
+	if (!materias[idx])
 		std::cout << "Inventory slot " << idx << " is empty!!"<< std::endl;
 	else
 	{
-		materias[idx - 1] = NULL;
+		materias[idx] = NULL;
 		std::cout << "Materia unequiped" << std::endl;
 	}
 }

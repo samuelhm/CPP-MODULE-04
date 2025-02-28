@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:19:31 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/28 21:39:04 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/28 22:10:59 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other )
 			materias[i] = NULL;
 		}
 		if (other.materias[i] != NULL)
-			this->materias[i] = other.materias[i];
+			this->materias[i] = other.materias[i]->clone();
 	}
 	return *this;
 }
@@ -41,7 +41,7 @@ MateriaSource::~MateriaSource(void)
 {
 	for (int i = 0; i < 4 ; i++)
 	{
-		if (materias[i] != NULL)
+		if (materias[i])
 		{
 			delete materias[i];
 			materias[i] = NULL;
