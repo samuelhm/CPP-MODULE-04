@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 20:19:31 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/28 20:46:05 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/28 21:39:04 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 #include <iostream>
 
 
-MateriaSource::MateriaSource(void) {}
+MateriaSource::MateriaSource(void)
+{
+	for (int i = 0; i < 4; i++)
+		materias[i] = NULL;
+}
 
 MateriaSource::MateriaSource(const MateriaSource& other) { *this = other; }
 
-MateriaSource& MateriaSource::operator=(const MateriaSource& other ) {
-	if (this != &other)
+MateriaSource& MateriaSource::operator=(const MateriaSource& other )
+{
+	for (int i = 0; i < 4; i++)
 	{
-		for (int i = 0; i < 4; i++)
+		if (this->materias[i])
 		{
-			this->materias[i] = other.materias[i];
+			delete materias[i];
+			materias[i] = NULL;
 		}
+		if (other.materias[i] != NULL)
+			this->materias[i] = other.materias[i];
 	}
 	return *this;
 }
@@ -32,16 +40,26 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other ) {
 MateriaSource::~MateriaSource(void)
 {
 	for (int i = 0; i < 4 ; i++)
-		if (materias[i])
+	{
+		if (materias[i] != NULL)
+		{
 			delete materias[i];
+			materias[i] = NULL;
+		}
+	}
 }
 
 void MateriaSource::learnMateria(AMateria *m)
 {
+	if (!m)
+	{
+		std::cout << "Cannot learn a NULL materia!" << std::endl;
+		return;
+	}
 	int i = 0;
-	while (materias[i] != NULL && i < 3)
+	while (i < 4 && materias[i] != NULL)
 		i++;
-	if (i >= 3)
+	if (i >= 4)
 		std::cout << "Inventory full, cannot learn this materia." << std::endl;
 	else
 	{
@@ -53,10 +71,10 @@ void MateriaSource::learnMateria(AMateria *m)
 AMateria *MateriaSource::createMateria(const std::string& type)
 {
 	int i = 0;
-	while (materias[i] != NULL && i < 3)
+	while (i < 4 && materias[i] != NULL)
 	{
-		if (materias[i]->getType().compare(type))
-			return (materias[i]);
+		if (materias[i]->getType() == type)
+			return (materias[i]->clone());
 		i++;
 	}
 	std::cout << "Unknown Materia, cannot create it!." << std::endl;

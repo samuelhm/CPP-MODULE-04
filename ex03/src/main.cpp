@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 18:23:44 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/28 20:35:49 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/28 21:34:02 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
+	delete tmp;
 	return (0);
 }

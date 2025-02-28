@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:01:28 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/28 20:39:24 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/28 21:10:39 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ AMateria* Cure::clone() const { return (new Cure(*this)); }
 
 void	Cure::use(ICharacter& target)
 {
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }

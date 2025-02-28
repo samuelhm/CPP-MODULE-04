@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 13:13:40 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/28 20:40:35 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/28 21:41:27 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ Character::Character(const std::string &Name) : name(Name)
 Character::Character(const Character &other) : name(other.name)
 {
 	for (int i = 0; i < 4 ; i++)
-		materias[i] = other.materias[i]->clone();
+		if (other.materias[i] != NULL)
+			materias[i] = other.materias[i]->clone();
 }
 Character& Character::operator=(const Character &other)
 {
 	for (int i = 0; i < 4 ; i++)
 		if (materias[i] != NULL)
+		{
 			delete materias[i];
+			materias[i] = NULL;
+		}
 	for (int i = 0; i < 4 ; i++)
 		if (other.materias[i] != NULL)
 			materias[i] = other.materias[i]->clone();
@@ -41,8 +45,13 @@ Character& Character::operator=(const Character &other)
 Character::~Character()
 {
 	for (int i = 0; i < 4 ; i++)
+	{
 		if (materias[i])
+		{
 			delete materias[i];
+			materias[i] = NULL;
+		}
+	}
 }
 
 std::string const & Character::getName() const
@@ -52,13 +61,15 @@ std::string const & Character::getName() const
 void Character::equip(AMateria* m)
 {
 	int i = 0;
+	if (!m)
+		return ;
 	while (materias[i])
 		i++;
 	if (i >= 3)
 		std::cout << "Inventory full, cannot equip this materia." << std::endl;
 	else
 	{
-		materias[i] = m->clone();
+		materias[i] = m;
 		std::cout << "Materia equiped" << std::endl;
 	}
 }
@@ -73,20 +84,19 @@ void Character::unequip(int idx)
 		std::cout << "Inventory slot " << idx << " is empty!!"<< std::endl;
 	else
 	{
-		delete materias[idx - 1];
 		materias[idx - 1] = NULL;
 		std::cout << "Materia unequiped" << std::endl;
 	}
 }
 void Character::use(int idx, ICharacter& target)
 {
-	if (idx > 4 || idx < 1)
+	if (idx >= 4 || idx < 0)
 	{
 		std::cout << "Inventory slots is 1 to 4!!" << std::endl;
 		return ;
 	}
-	if (materias[idx - 1])
-		materias[idx - 1]->use(target);
+	if (materias[idx])
+		materias[idx]->use(target);
 	else
 		std::cout << "No materias found in this slot!!" << std::endl;
 }
