@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Character.hpp                                      :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 13:13:50 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/26 13:16:09 by shurtado         ###   ########.fr       */
+/*   Created: 2025/02/28 19:37:20 by shurtado          #+#    #+#             */
+/*   Updated: 2025/02/28 19:38:25 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CHARACTER_HPP
-#define CHARACTER_HPP
+#ifndef IMATERIASOURCE_HPP
+#define IMATERIASOURCE_HPP
 
 #include "../AMateria/AMateria.hpp"
 
-class Character : ICharacter
+class IMateriaSource
 {
-	private:
-		AMateria *materias[4];
 	public:
-		Character();
-		Character(const Character &other);
-		Character& operator=(const Character &other);
-		~Character();
+		virtual ~IMateriaSource() {}
+		virtual void learnMateria(AMateria*) = 0;
+		virtual AMateria* createMateria(std::string const & type) = 0;
 };
 
 #endif

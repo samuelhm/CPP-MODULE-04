@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:22:32 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/26 12:27:56 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/28 20:36:47 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <string>
 #include "../AMateria/AMateria.hpp"
+
+class AMateria;
 
 class ICharacter
 {

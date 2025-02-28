@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cure.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:57:19 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/26 13:12:56 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/28 19:21:14 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ class Cure : public AMateria
 		Cure(const Cure &other);
 		Cure& operator=(const Cure &other);
 		~Cure();
+
+		AMateria* clone() const;
+		void use(ICharacter& target);
 };
 
 #endif
